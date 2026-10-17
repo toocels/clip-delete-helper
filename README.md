@@ -5,6 +5,15 @@ the newest entry in **GNOME Clipboard History**
 (`clipboard-history@alexsaveau.dev` by SUPERCILEX) down the list by 50
 positions, without deleting it, pasting it, or touching anything else.
 
+## Intent
+
+Meant to be used alongside **GNOME Clipboard History** — not as a
+replacement for it. The use case: something's sitting at the top of your
+clipboard history and you don't want it right there (e.g. you just copied
+something you don't want to accidentally repaste), but you also don't want
+to lose it. Pushing it down keeps it in history; scroll down in the
+Clipboard History menu whenever you want to find it again.
+
 ## Why this exists
 
 Clipboard History has no public API (no D-Bus interface, no CLI) to reorder
@@ -90,7 +99,9 @@ or just press `Ctrl+I` (if installed with `--keybinding`, see below).
 
 Pushes the newest Clipboard History entry down 50 positions (one full page)
 in the history list, without touching the clipboard, favorites, or any other
-entry.
+entry. 50 is Clipboard History's default page size (`PAGE_SIZE` in its
+`extension.js`), not an arbitrary number — to find an entry you moved, open
+Clipboard History and scroll down past the current page.
 
 ## Keyboard shortcut
 
