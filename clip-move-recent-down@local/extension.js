@@ -50,6 +50,16 @@ export default class ClipMoveRecentDownExtension extends Extension {
     entry.menuItem?.destroy();
     target.append(entry);
     indicator._addEntry(entry, false, false, insertIndex);
+
+    // Moving `entry` out of the tail position doesn't touch the real system
+    // clipboard — that's a separate thing from history order, and still
+    // holds `entry`'s text. Re-point it at whatever is now newest, the same
+    // way clicking that entry in the menu would, so a paste right after this
+    // call pastes the new top of history instead of the entry we just moved.
+    const newTop = entries.last();
+    if (newTop) {
+      indicator._selectEntry(newTop, true);
+    }
     return true;
   }
 }
