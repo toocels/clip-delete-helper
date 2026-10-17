@@ -1,0 +1,6 @@
+{
+  "name": "Clip Move Recent Down",
+  "description": "Exports a D-Bus method to move the newest Clipboard History entry down the list, for use by a terminal command.",
+  "uuid": "clip-move-recent-down@local",
+  "shell-version": ["50", "51"]
+}

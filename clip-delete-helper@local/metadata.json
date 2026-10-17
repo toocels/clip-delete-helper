@@ -1,6 +1,0 @@
-{
-  "name": "Clip Delete Helper",
-  "description": "Exports a D-Bus method to delete the newest Clipboard History entry, for use by a terminal command.",
-  "uuid": "clip-delete-helper@local",
-  "shell-version": ["50", "51"]
-}

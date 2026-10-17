@@ -1,0 +1,21 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+out=$(gdbus call --session \
+  --dest org.gnome.Shell \
+  --object-path /dev/local/ClipMoveRecentDown \
+  --method dev.local.ClipMoveRecentDown.MoveLatestDown 2>&1) || {
+  echo "clip-move-latest-down: D-Bus call failed: $out" >&2
+  echo "Is the 'Clip Move Recent Down' extension enabled? Try: gnome-extensions enable clip-move-recent-down@local" >&2
+  exit 1
+}
+
+if [[ "$out" == "(true,)" ]]; then
+  echo "Moved latest clipboard history entry down."
+elif [[ "$out" == "(false,)" ]]; then
+  echo "Nothing to move (history is empty or too short)." >&2
+  exit 1
+else
+  echo "clip-move-latest-down: unexpected response: $out" >&2
+  exit 1
+fi

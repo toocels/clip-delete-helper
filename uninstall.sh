@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Uninstall Clip Delete Helper (GNOME Shell extension + CLI command).
+# Uninstall Clip Move Recent Down (GNOME Shell extension + CLI command).
 # Usage: ./uninstall.sh [--keybinding]
 #   --keybinding   also remove the custom Ctrl+I shortcut, if one was
 #                  registered by install.sh --keybinding.
@@ -9,9 +9,9 @@
 # and, optionally, the custom keybinding, which Extension Manager won't do.
 set -euo pipefail
 
-UUID="clip-delete-helper@local"
+UUID="clip-move-recent-down@local"
 EXT_DST="$HOME/.local/share/gnome-shell/extensions/$UUID"
-BIN_DST="$HOME/.local/bin/clip-delete-latest"
+MOVE_BIN_DST="$HOME/.local/bin/clip-move-latest-down"
 
 WANT_KEYBINDING=0
 for arg in "$@"; do
@@ -28,8 +28,8 @@ fi
 echo "Removing $EXT_DST"
 rm -rf "$EXT_DST"
 
-echo "Removing $BIN_DST"
-rm -f "$BIN_DST"
+echo "Removing $MOVE_BIN_DST"
+rm -f "$MOVE_BIN_DST"
 
 if [[ "$WANT_KEYBINDING" -eq 1 ]]; then
   SCHEMA="org.gnome.settings-daemon.plugins.media-keys"
@@ -39,7 +39,7 @@ if [[ "$WANT_KEYBINDING" -eq 1 ]]; then
   slot=""
   for p in $(echo "$existing" | grep -oE "$PATH_PREFIX/custom[0-9]+/"); do
     cmd="$(gsettings get "$SCHEMA.custom-keybinding:$p" command 2>/dev/null | tr -d "'")"
-    if [[ "$cmd" == "$BIN_DST" ]]; then
+    if [[ "$cmd" == "$MOVE_BIN_DST" ]]; then
       slot="$p"
       break
     fi
